@@ -24,8 +24,8 @@ def test_full_checkout_flow(logged_in_page):
     page.locator("[data-test='checkout']").click()
 
     # 6. Fill out the checkout information form
-    page.locator("[data-test='firstName']").fill("Khanyisile")
-    page.locator("[data-test='lastName']").fill("Danster")
+    page.locator("[data-test='firstName']").fill("Mihle")
+    page.locator("[data-test='lastName']").fill("Potwana")
     page.locator("[data-test='postalCode']").fill("8001") 
     
     page.locator("[data-test='continue']").click()
