@@ -1,0 +1,44 @@
+#  Python QA Automation Engine
+
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-Automation-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-Framework-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen?style=for-the-badge)
+
+An end-to-end automated UI testing framework built with **Python**, **Playwright**, and **pytest**. This project automates core user workflows and critical monetary paths for e-commerce platforms using [SauceDemo](https://www.saucedemo.com/) as the target application under test (AUT).
+
+---
+
+##  Project Overview
+
+In e-commerce engineering, checkout failures directly translate to lost revenue and reduced customer trust. The **Python QA Automation Engine** provides reliable, fast, and repeatable automated test execution across multiple browser engines to catch UI regressions early in the development lifecycle.
+
+Designed and developed with software engineering best practices, this framework demonstrates:
+* **UI Automation & Verification:** Interacting with complex DOM elements and asserting UI state changes.
+* **Resilient Element Selection:** Leveraging robust `data-test` attributes and explicit Playwright assertions to prevent test flakiness.
+* **Modular Test Structure:** Clean file organization separating authentication workflows from core business logic.
+* **Continuous Testing Readiness:** Native support for both headless (CI/CD optimized) and headed (debugging) execution modes.
+
+---
+
+##  Tech Stack & Dependencies
+
+| Tool / Library | Role / Purpose |
+| :--- | :--- |
+| **Python 3.12+** | Core programming language |
+| **Playwright (`sync_api`)** | High-performance browser automation engine (Chromium, Firefox, WebKit) |
+| **pytest** | Test runner, assertions, and test execution management |
+| **pytest-playwright** | Official plugin integrating Playwright fixtures into pytest |
+| **Virtualenv (`venv`)** | Isolated Python runtime environment |
+
+---
+
+##  Repository Structure
+
+```text
+Python-QA-Automation-Engine/
+├── .gitignore             # Excludes venv, pytest cache, and temporary files
+├── README.md              # Project documentation and setup guide
+├── requirements.txt       # Frozen Python dependencies
+├── test_login.py          # Automated authentication test scenarios
+└── test_checkout.py       # End-to-end checkout & shopping cart test scenarios
