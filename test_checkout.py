@@ -1,39 +1,27 @@
 from playwright.sync_api import expect
+from pages.checkout_page import CheckoutPage
 
-# Notice we ask for 'logged_in_page' instead of just 'page'
 def test_full_checkout_flow(logged_in_page):
-    # We rename it to 'page' just to keep the rest of the code the same
+    # Setup our Page Object
     page = logged_in_page 
+    checkout_page = CheckoutPage(page)
 
-    # 1. Add an item to the cart (Notice we skipped the login steps entirely!)
-    page.locator("[data-test='add-to-cart-sauce-labs-backpack']").click()
+    # 1. Add item and assert it worked
+    checkout_page.add_backpack_to_cart()
+    expect(checkout_page.cart_badge).to_have_text("1")
 
-    # 2. Assert the shopping cart badge updates to '1'
-    cart_badge = page.locator(".shopping_cart_badge")
-    expect(cart_badge).to_have_text("1")
-
-    # 3. Navigate to the cart page
-    page.locator(".shopping_cart_link").click()
-
-    # 4. Assert we are on the cart page and the correct item is there
+    # 2. Go to cart and verify item
+    checkout_page.go_to_cart()
     expect(page).to_have_url("https://www.saucedemo.com/cart.html")
-    item_name = page.locator(".inventory_item_name")
-    expect(item_name).to_have_text("Sauce Labs Backpack")
+    expect(checkout_page.item_name).to_have_text("Sauce Labs Backpack")
 
-    # 5. Proceed to Checkout
-    page.locator("[data-test='checkout']").click()
+    # 3. Proceed to checkout and fill out the form
+    checkout_page.start_checkout()
+    checkout_page.fill_personal_info("Mihle", "Potwana", "8001")
 
-    # 6. Fill out the checkout information form
-    page.locator("[data-test='firstName']").fill("Mihle")
-    page.locator("[data-test='lastName']").fill("Potwana")
-    page.locator("[data-test='postalCode']").fill("8001") 
-    
-    page.locator("[data-test='continue']").click()
-
-    # 7. Assert we are on the final overview page, then finish the order
+    # 4. Finish the order
     expect(page).to_have_url("https://www.saucedemo.com/checkout-step-two.html")
-    page.locator("[data-test='finish']").click()
+    checkout_page.finish_order()
 
-    # 8. Final Assertion: Verify the success message appears
-    success_message = page.locator(".complete-header")
-    expect(success_message).to_have_text("Thank you for your order!")
+    # 5. Final Assertions
+    expect(checkout_page.success_message).to_have_text("Thank you for your order!")

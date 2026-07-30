@@ -1,38 +1,24 @@
 from playwright.sync_api import Page, expect
+from pages.login_page import LoginPage
 
 def test_successful_login(page: Page):
-    # 1. Navigate to the practice website
-    page.goto("https://www.saucedemo.com/")
+    login_page = LoginPage(page)
+    
+    # Use the blueprint actions!
+    login_page.navigate()
+    login_page.login("standard_user", "secret_sauce")
 
-    # 2. Fill in the login form fields
-    page.locator("#user-name").fill("standard_user")
-    page.locator("#password").fill("secret_sauce")
-
-    # 3. Click the login button
-    page.locator("#login-button").click()
-
-    # 4. Assert: Verify we were redirected to the inventory page
+    # Assertions stay in the test file
     expect(page).to_have_url("https://www.saucedemo.com/inventory.html")
-
-    # 5. Assert: Verify the page header text displays "Products"
-    header = page.locator(".title")
-    expect(header).to_have_text("Products")
+    expect(page.locator(".title")).to_have_text("Products")
 
 
-    def test_invalid_password_error(page: Page):
-    # 1. Navigate to the practice website
-    page.goto("https://www.saucedemo.com/")
+def test_invalid_password_error(page: Page):
+    login_page = LoginPage(page)
+    
+    login_page.navigate()
+    login_page.login("standard_user", "completely_wrong_password")
 
-    # 2. Fill in the right username, but a WRONG password
-    page.locator("#user-name").fill("standard_user")
-    page.locator("#password").fill("completely_wrong_password")
-
-    # 3. Click the login button
-    page.locator("#login-button").click()
-
-    # 4. Assert: Verify the error message container is visible on screen
-    error_message = page.locator("[data-test='error']")
-    expect(error_message).to_be_visible()
-
-    # 5. Assert: Verify the exact text inside the error message
-    expect(error_message).to_contain_text("Epic sadface: Username and password do not match")
+    # We can even use the locators saved in the blueprint!
+    expect(login_page.error_message).to_be_visible()
+    expect(login_page.error_message).to_contain_text("Epic sadface: Username and password do not match")
