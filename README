@@ -329,3 +329,32 @@ The generated report is excluded from Git tracking through .gitignore.
 The login test uses pytest.mark.parametrize to execute the same test logic with different sets of data.
 
 Example scenarios include:
+
+```
+Username: standard_user
+Password: wrong_password
+Expected: Username and password do not match
+```
+```
+Username: locked_out_user
+Password: secret_sauce
+Expected: User has been locked out
+```
+```
+Username: invalid_user
+Password: secret_sauce
+Expected: Username and password do not match
+```
+# Reusable Fixtures
+
+The project uses conftest.py to define reusable pytest fixtures.
+
+The logged_in_page fixture:
+
+1. Opens SauceDemo
+2. Retrieves the configured credentials
+3. Enters the credentials
+4. Logs into the application
+5. Provides the authenticated page to the test
+
+This allows tests that require authentication to reuse the same setup instead of repeating the login steps.
