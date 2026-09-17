@@ -13,7 +13,7 @@ def test_full_checkout_flow(logged_in_page):
     # 2. Go to cart and verify item
     checkout_page.go_to_cart()
     expect(page).to_have_url("https://www.saucedemo.com/cart.html")
-    expect(checkout_page.item_name).to_have_text("Sauce Labs Backpack")
+    expect(checkout_page.backpack_name).to_have_text("Sauce Labs Backpack")
 
     # 3. Proceed to checkout and fill out the form
     checkout_page.start_checkout()

@@ -7,7 +7,7 @@ class CheckoutPage:
         self.add_backpack_btn = page.locator("[data-test='add-to-cart-sauce-labs-backpack']")
         self.cart_badge = page.locator(".shopping_cart_badge")
         self.cart_link = page.locator(".shopping_cart_link")
-        self.item_name = page.locator(".inventory_item_name")
+        self.backpack_name = page.locator( '[data-test="inventory-item-name"]' ).filter(has_text="Sauce Labs Backpack")
         self.checkout_btn = page.locator("[data-test='checkout']")
         
         # Checkout Form Elements
