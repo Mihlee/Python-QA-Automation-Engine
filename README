@@ -1,44 +1,138 @@
-#  Python QA Automation Engine
+# Python QA Automation Engine
 
-![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Playwright](https://img.shields.io/badge/Playwright-Automation-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)
-![pytest](https://img.shields.io/badge/pytest-Framework-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-1.61.0-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-9.1.1-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
-An end-to-end automated UI testing framework built with **Python**, **Playwright**, and **pytest**. This project automates core user workflows and critical monetary paths for e-commerce platforms using [SauceDemo](https://www.saucedemo.com/) as the target application under test (AUT).
+An end-to-end web UI automation framework built with **Python, Playwright, and pytest**.
+
+The project demonstrates practical QA automation techniques by testing authentication and e-commerce checkout workflows against **SauceDemo**.
 
 ---
 
 ##  Project Overview
 
-In e-commerce engineering, checkout failures directly translate to lost revenue and reduced customer trust. The **Python QA Automation Engine** provides reliable, fast, and repeatable automated test execution across multiple browser engines to catch UI regressions early in the development lifecycle.
+The **Python QA Automation Engine** is a UI test automation framework designed to provide reliable and repeatable automated testing for critical user workflows.
 
-Designed and developed with software engineering best practices, this framework demonstrates:
-* **UI Automation & Verification:** Interacting with complex DOM elements and asserting UI state changes.
-* **Resilient Element Selection:** Leveraging robust `data-test` attributes and explicit Playwright assertions to prevent test flakiness.
-* **Modular Test Structure:** Clean file organization separating authentication workflows from core business logic.
-* **Continuous Testing Readiness:** Native support for both headless (CI/CD optimized) and headed (debugging) execution modes.
+The current test suite focuses on two important areas:
+
+- Authentication
+- E-commerce checkout
+
+The framework uses the **Page Object Model (POM)** to separate test logic from page interaction logic, making the tests easier to read, maintain, and extend.
+
+The project also includes:
+
+- Positive and negative test scenarios
+- Data-driven testing
+- Reusable pytest fixtures
+- Page Object Model architecture
+- Playwright browser automation
+- HTML test reporting
+- GitHub Actions continuous integration
+
+**Application Under Test (AUT):**
+
+[SauceDemo](https://www.saucedemo.com/)
 
 ---
 
-##  Tech Stack & Dependencies
+#  Testing Objectives
 
-| Tool / Library | Role / Purpose |
-| :--- | :--- |
-| **Python 3.12+** | Core programming language |
-| **Playwright (`sync_api`)** | High-performance browser automation engine (Chromium, Firefox, WebKit) |
-| **pytest** | Test runner, assertions, and test execution management |
-| **pytest-playwright** | Official plugin integrating Playwright fixtures into pytest |
-| **Virtualenv (`venv`)** | Isolated Python runtime environment |
+The purpose of this project is to demonstrate how automated UI testing can be used to validate important application workflows.
+
+The framework currently validates:
+
+### Authentication
+
+- Successful login with valid credentials
+- Login failure with an incorrect password
+- Login failure for a locked-out user
+- Login failure with invalid credentials
+
+### Shopping and Checkout
+
+- Adding a product to the shopping cart
+- Verifying the cart item count
+- Verifying the selected product
+- Navigating to checkout
+- Entering customer information
+- Completing an order
+- Verifying the successful order confirmation
 
 ---
 
-##  Repository Structure
+#  Test Coverage
+
+| Area | Scenario | Type |
+|---|---|---|
+| Login | Successful login | Positive |
+| Login | Incorrect password | Negative |
+| Login | Locked-out user | Negative |
+| Login | Invalid username | Negative |
+| Shopping Cart | Add Sauce Labs Backpack | Functional |
+| Shopping Cart | Verify cart item | Functional |
+| Checkout | Enter customer information | End-to-End |
+| Checkout | Complete order | End-to-End |
+| Checkout | Verify order confirmation | End-to-End |
+
+> The parameterized login test contains multiple data sets, allowing the same test logic to validate different invalid-login scenarios.
+
+---
+
+#  Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| **Python 3.12+** | Programming language |
+| **Playwright** | Browser automation |
+| **pytest** | Test framework and test runner |
+| **pytest-playwright** | Playwright integration with pytest |
+| **pytest-html** | HTML test reporting |
+| **python-dotenv** | Environment variable management |
+| **GitHub Actions** | Continuous integration |
+| **Page Object Model** | Test architecture/design pattern |
+
+---
+
+#  Framework Architecture
+
+The project follows the **Page Object Model (POM)** design pattern.
+
+Instead of placing selectors and browser interactions directly inside the test cases, page-specific actions are maintained inside dedicated page classes.
 
 ```text
-Python-QA-Automation-Engine/
-├── .gitignore             # Excludes venv, pytest cache, and temporary files
-├── README.md              # Project documentation and setup guide
-├── requirements.txt       # Frozen Python dependencies
-├── test_login.py          # Automated authentication test scenarios
-└── test_checkout.py       # End-to-end checkout & shopping cart test scenarios
+                 ┌─────────────────────┐
+                 │       pytest        │
+                 │    Test Runner      │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │    Test Scenarios   │
+                 │                     │
+                 │ test_login.py       │
+                 │ test_checkout.py    │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │    Page Objects     │
+                 │                     │
+                 │ LoginPage           │
+                 │ CheckoutPage        │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │      Playwright     │
+                 │ Browser Automation  │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │      SauceDemo      │
+                 │ Application Under   │
+                 │       Test          │
+                 └─────────────────────┘
