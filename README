@@ -174,3 +174,111 @@ Python-QA-Automation-Engine/
 | `requirements.txt` | Lists Python project dependencies |
 | `.gitignore` | Specifies files and folders that Git should ignore |
 | `README.md` | Project documentation |
+
+# Test Execution Flow
+**Login Test**
+
+```text
+Open SauceDemo
+      ↓
+Navigate to Login
+      ↓
+Enter Credentials
+      ↓
+Click Login
+      ↓
+Validate Result
+```
+
+**For negative scenarios:**
+```text
+Open SauceDemo
+      ↓
+Enter Invalid Credentials
+      ↓
+Click Login
+      ↓
+Capture Error Message
+      ↓
+Compare Against Expected Result
+```
+
+**Checkout Test**
+```text
+Login
+  ↓
+Open Products
+  ↓
+Add Sauce Labs Backpack
+  ↓
+Verify Cart Badge
+  ↓
+Open Cart
+  ↓
+Verify Product
+  ↓
+Start Checkout
+  ↓
+Enter Customer Information
+  ↓
+Continue
+  ↓
+Finish Order
+  ↓
+Verify "Thank you for your order!"
+```
+# Prerequisites
+Before running the project, make sure you have:
+
+- Python 3.12 or newer
+- Git
+- pip
+-  Internet access for the SauceDemo application and Playwright browser installation
+
+
+**Check your Python version**
+```text
+python --version
+```
+# Installation
+**1. Clone the repository**
+```
+git clone https://github.com/Mihlee/Python-QA-Automation-Engine.git
+```
+**2. Create a virtual environment**
+
+**Windows**
+```
+python -m venv venv
+```
+Activate it:
+```
+venv\Scripts\activate
+```
+**macOS / Linux**
+```
+python3 -m venv venv
+```
+Activate it:
+```
+source venv/bin/activate
+```
+```
+When the environment is active, your terminal should display something similar to:  
+(venv)
+```
+# Install Dependencies
+Install all project dependencies: 
+``` 
+pip install -r requirements.txt
+```
+The project uses pinned versions of its main testing dependencies to provide a more consistent environment.
+
+# Install Playwright Browsers
+
+After installing the Python dependencies, install the Playwright browser:
+```
+playwright install chromium
+```
+The current CI workflow also installs Chromium for automated execution.
+
