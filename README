@@ -282,3 +282,50 @@ playwright install chromium
 ```
 The current CI workflow also installs Chromium for automated execution.
 
+# Running the Tests
+
+Make sure your virtual environment is activated before running the tests.
+
+**Run the complete test suite**
+```
+pytest
+```
+**Run tests with detailed output**
+```
+pytest -v
+```
+**Run tests with the browser visible**     
+For demonstrations and debugging, use:
+```
+pytest --headed -v
+```
+**Run Specific Tests**  
+
+**Login tests**
+```
+pytest test_login.py -v
+```
+**Checkout test**
+```
+pytest test_checkout.py -v
+```
+# Generate an HTML Test Report
+
+The project includes pytest-html for generating a test execution report.
+
+**Run:**
+```
+pytest --html=report.html --self-contained-html
+```
+This creates:
+```
+report.html
+```
+Open the report in your browser to review the test results.  
+The generated report is excluded from Git tracking through .gitignore.
+
+#  Data-Driven Testing
+
+The login test uses pytest.mark.parametrize to execute the same test logic with different sets of data.
+
+Example scenarios include:
