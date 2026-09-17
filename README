@@ -136,3 +136,41 @@ Instead of placing selectors and browser interactions directly inside the test c
                  │ Application Under   │
                  │       Test          │
                  └─────────────────────┘
+```
+#  Project Architecture
+
+The project follows a **Page Object Model (POM)** structure, separating test scenarios from page-specific browser interactions.
+
+```text
+Python-QA-Automation-Engine/
+│
+├── .github/
+│   └── workflows/
+│       └── playwright.yml
+│
+├── pages/
+│   ├── login_page.py
+│   └── checkout_page.py
+│
+├── conftest.py
+├── test_login.py
+├── test_checkout.py
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
+
+### File and Folder Responsibilities
+
+| File / Folder | Purpose |
+|---|---|
+| `.github/workflows/` | Contains the GitHub Actions CI workflow |
+| `pages/` | Contains Page Object classes |
+| `login_page.py` | Handles login page interactions |
+| `checkout_page.py` | Handles checkout and shopping-cart interactions |
+| `conftest.py` | Contains shared pytest fixtures |
+| `test_login.py` | Contains authentication test scenarios |
+| `test_checkout.py` | Contains the end-to-end checkout test |
+| `requirements.txt` | Lists Python project dependencies |
+| `.gitignore` | Specifies files and folders that Git should ignore |
+| `README.md` | Project documentation |
