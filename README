@@ -358,3 +358,12 @@ The logged_in_page fixture:
 5. Provides the authenticated page to the test
 
 This allows tests that require authentication to reuse the same setup instead of repeating the login steps.
+
+## 🎥 Project Demo
+
+Watch the full project demonstration on YouTube:
+
+▶️ **[Watch the Python QA Automation Engine Demo](https://youtu.be/lfLoILRHBu8)**
+
+The demo covers the test automation framework, login test scenarios, checkout workflow, Playwright browser automation, and test execution.
+
